@@ -38,8 +38,7 @@ void FileSystem::createFolder() {
   currentFolder->addSubfolder(n);
 }
 
-void FileSystem::deleteFolder() {}
-void FileSystem::deleteFile() {}
+
 void FileSystem::searchFolder() {
   string folderName;
   cout << "Enter folder name to enter: ";
@@ -152,6 +151,9 @@ void FileSystem::loadFileSystem() {
   }
   cout << "File system loaded successfully!\n";
 }
+
+void FileSystem::deleteFolder() {}
+void FileSystem::deleteFile() {}
 
 void FileSystem::mainMenu() {
   int option;
