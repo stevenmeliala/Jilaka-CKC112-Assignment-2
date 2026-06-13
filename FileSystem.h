@@ -21,7 +21,7 @@ public:
   void deleteFile();
   void createFolder();
   void deleteFolder();
-  void searchFolder();
+  void enterFolder();
   void goBack();
   void showCurrentPath();
   void loadFileSystem();

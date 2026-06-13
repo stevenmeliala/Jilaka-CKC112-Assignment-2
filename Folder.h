@@ -39,6 +39,9 @@ public:
   void addFile(File temp);
   Folder *addSubfolder(string n);
   void addSubfolder(Folder *newFolder);
+  void deleteFile(string);
+  void deleteFolder(string);
+  string getPath();
   void printFiles();
   void printFolders();
   void displayCurrentFolder();

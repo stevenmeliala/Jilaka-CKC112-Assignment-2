@@ -39,22 +39,47 @@ void FileSystem::createFolder() {
   while (n == " " || n.length() == 0) {
     getline(cin, n);
   }
-  if (currentFolder->folderExists(n)) {
+  if (!currentFolder->folderExists(n)) {
     currentFolder->addSubfolder(n);
   } else {
     cout << "A folder with the same name already exists in this folder\n";
   }
 }
 
-void FileSystem::deleteFolder() {}
-void FileSystem::deleteFile() {}
-void FileSystem::searchFolder() {
+void FileSystem::deleteFile() {
+  string fileName;
+
+  cout << "Enter the full file name to delete (example: easy.txt): ";
+  cin >> fileName;
+
+  try {
+    root.deleteFile(fileName);
+  } catch (const char *msg) {
+    cout << msg << endl;
+  }
+}
+
+void FileSystem::deleteFolder() {
+  string folderName;
+
+  cout << "Enter folder name to delete: ";
+  cin >> folderName;
+
+  try {
+    root.deleteFolder(folderName);
+  } catch (const char *msg) {
+    cout << msg << endl;
+  }
+}
+
+void FileSystem::enterFolder() {
   string folderName;
   cout << "Enter folder name to enter: ";
-  getline(cin, folderName);
+  while (folderName == " " || folderName.length() == 0) {
+    getline(cin, folderName);
+  }
+
   try {
-    if (folderName.empty())
-      throw runtime_error("Error: Folder name cannot be empty.");
     if (!currentFolder->folderExists(folderName))
       throw runtime_error("Error: '" + folderName + "' not found.");
 
@@ -85,7 +110,9 @@ void FileSystem::goBack() {
     cout << e.what() << endl;
   }
 }
-void FileSystem::showCurrentPath() {}
+void FileSystem::showCurrentPath() {
+  cout << "Current path: " << currentFolder->getPath() << endl;
+}
 
 void FileSystem::loadFileSystem() {
   ifstream sampleFiles("filesystem.txt");
@@ -216,7 +243,7 @@ void FileSystem::mainMenu() {
       break;
     }
     case 6:
-      searchFolder();
+      enterFolder();
       break;
     case 7:
       goBack();
