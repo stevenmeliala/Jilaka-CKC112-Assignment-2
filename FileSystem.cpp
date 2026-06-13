@@ -66,7 +66,22 @@ void FileSystem::deleteFolder() {
   cin >> folderName;
 
   try {
+    Folder *temp = currentFolder;
+    bool resetCurrent = false;
+    while (temp != &root && temp != nullptr) {
+      if (temp->getName() == folderName) {
+        resetCurrent = true;
+        break;
+      }
+      temp = temp->getParent();
+    }
+
     root.deleteFolder(folderName);
+
+    if (resetCurrent) {
+      currentFolder = &root;
+      cout << "Notice: You were inside the deleted folder. Returned to Root.\n";
+    }
   } catch (const char *msg) {
     cout << msg << endl;
   }
@@ -232,7 +247,7 @@ void FileSystem::mainMenu() {
       break;
     case 5: {
       string n;
-      cout << "Enter the file name to search: ";
+      cout << "Enter the full file name to search (example: easy.txt): ";
       cin >> n;
       File *foundFile = root.searchFile(n);
       if (foundFile != nullptr) {

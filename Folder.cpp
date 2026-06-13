@@ -90,8 +90,7 @@ void Folder::displayTree(int level) {
 File *Folder::searchFile(string fileName) {
   // First search files directly inside this folder.
   for (int i = 0; i < files.size(); i++) {
-    if (files[i].getFullFileName() == fileName ||
-        files[i].getName() == fileName) {
+    if (files[i].getFullFileName() == fileName) {
       return &files[i];
     }
   }
